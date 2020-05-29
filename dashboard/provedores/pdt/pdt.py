@@ -64,24 +64,6 @@ def grafico_despesas(
     return json.loads(fig.to_json()).get('data')
 
 
-def gapminder(year = 2007):
-
-    df = px.data.gapminder()
-    df = df.loc[df['year'] == year]
-    fig = px.scatter(
-        df,
-        x = "gdpPercap",
-        y = "lifeExp",
-        size  = "pop",
-        color = "continent",
-        hover_name = "country",
-        log_x = True,
-        size_max = 60
-    )
-
-    return json.loads(fig.to_json()).get('data')
-
-
 @pdt_bp.route("/pdt", methods = ['GET', 'POST'])
 def pdt_page():
 
