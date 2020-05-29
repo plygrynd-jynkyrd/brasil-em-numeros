@@ -39,7 +39,7 @@
             <select id="orgao-gov", multiple>
               <option value="" disabled selected>Selecione o órgão do superior</option>
               {% for org in orgao %}
-                <option value="{{loop.index}}">{{org}}</option>
+                <option value="{{org}}">{{org}}</option>
               {% endfor %}
             </select>
             <label>Órgãos Superiores</label>
@@ -48,7 +48,7 @@
             <select id="funcao-gov", multiple>
               <option value="" disabled selected>Selecione a função do governo</option>
               {% for fun in funcao %}
-                <option value="{{loop.index}}">{{fun}}</option>
+                <option value="{{fun}}">{{fun}}</option>
               {% endfor %}
             </select>
             <label>Funções</label>

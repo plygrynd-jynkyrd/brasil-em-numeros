@@ -29,6 +29,14 @@ function plot_pdt(data){
     );
 };
 
+TESTER = document.getElementById('pdt-chart')
+TESTER.addEventListener('DOMContentLoaded', function(){
+    fetch("/pdt/pdt_data").then(
+        response => response.json()
+    ).then(
+        data => plot_pdt(data)
+    )
+})
 
 document.addEventListener('DOMContentLoaded', function() {
     // var elems = document.getElementById('pdt-date');
@@ -42,47 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, {});
+    
+});
 
-    fetch("/pdt/pdt_data").then(
-        response => response.json()
-    ).then(
-        data => plot_pdt(data)
-    )
 
-  });
 
-// slider = document.getElementById("pdt-slider");
-// slider.addEventListener("input", e => {
-//     fetch("/pdt/pdt", {
-//         method : 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(slider.value)
-//     }).then(
-//         response => {
-//             if(response.status == 200){
-//                 return response.ok
-//             } 
 
-//             throw 'POST request to pdt data did not succeed.'
-//         }
-//     ).then(
-//         res => {
-//             fetch("/pdt/pdt_data").then(
-//                 response => response.json()
-//             ).then(
-//                 data => plot_pdt(data)
-//             )
-//         }
-//     )
-// });
 
-TESTER = document.getElementById('pdt-chart')
-TESTER.addEventListener('DOMContentLoaded', function(){
-    fetch("/pdt/pdt_data").then(
-        response => response.json()
-    ).then(
-        data => plot_pdt(data)
-    )
-})
+
+

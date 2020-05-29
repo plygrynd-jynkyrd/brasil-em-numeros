@@ -31,17 +31,28 @@ def set_defaults():
     session['modalidade'] = 'Pago'
 
 
-def grafico_despesas(modalidade = 'Pago'):
+def grafico_despesas(
+    orgaos  = None,
+    funcoes = None,
+    modalidade = 'Pago'
+):
 
     dd = desp.groupby(
         ['Órgão Superior', 'Função', 'Unidade Gestora', 'modalidade'],
         as_index = False
     ).sum()
 
-    fig = dd.loc[
-        dd['modalidade'] == modalidade, :
-    ].pipe(
-        lambda df: px.sunburst(
+    cond = dd['modalidade'] == modalidade
+    if orgaos is not None:
+        if orgaos:
+            cond = cond & (dd['Órgão Superior'].isin(orgaos))
+    
+    if funcoes is not None:
+        if funcoes:
+            cond = cond & (dd['Função'].isin(funcoes))
+
+    fig = dd.loc[cond, :].pipe(
+        lambda df: px.treemap(
             df.query("valor > 0"),
             path   = ['Órgão Superior', 'Função', 'Unidade Gestora'],
             values = 'valor',
@@ -75,10 +86,12 @@ def gapminder(year = 2007):
 def pdt_page():
 
     if request.method == 'POST':
-        year = request.get_json()
-        year = int(year)
-        session['year'] = year
-        print(session['year'])
+        js = request.get_json()
+        
+        for key, val in js.items():
+            print("{} : {}".format(key, val))
+            session[key] = val
+        
         return make_response(
             'Updating data succeeded!', 200, json_headers()
         )
@@ -87,14 +100,16 @@ def pdt_page():
         "pdt.html",
         title = 'Portal da transparência',
         funcao = funcoes,
-        orgao  = orgaos
+        orgao  = orgaos,
+        modalidade = mods
     )
 
 
 @pdt_bp.route("/pdt_data")
 def pdt_data():
 
-    data = grafico_despesas(session['modalidade'])
-    # data.insert(0, g.year)
-    print(session.get('year'))
+    org = session.get('orgao')
+    fun = session.get('funcao')
+    mod = session.get('modalidade')
+    data = grafico_despesas(org, fun, mod)
     return make_response(jsonify(data), 200, json_headers())
