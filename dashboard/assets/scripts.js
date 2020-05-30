@@ -22,67 +22,40 @@
 })(jQuery);
 
 
-function plot_pdt(data){
-    return Plotly.newPlot(
-        TESTER, data,
-        {margin: { t: 0 } }
-    );
-};
+// function plot_pdt(data){
+//     return Plotly.newPlot(
+//         TESTER, data,
+//         {margin: { t: 0 } }
+//     );
+// };
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    // var elems = document.getElementById('pdt-date');
-    // var instances = M.Datepicker.init(elems, {});
-    // elems.M_Datepicker.options.i18n.months = [
-    //     'Janeiro', 'Fevereiro', 'Março',
-    //     'Abril', 'Maio', 'Junho', 'Julho',
-    //     'Agosto', 'Setembro', 'Outubro',
-    //     'Novembro', 'Dezembro'
-    // ];
-
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, {});
-
-    fetch("/pdt/pdt_data").then(
-        response => response.json()
-    ).then(
-        data => plot_pdt(data)
-    )
-
-  });
-
-// slider = document.getElementById("pdt-slider");
-// slider.addEventListener("input", e => {
-//     fetch("/pdt/pdt", {
-//         method : 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(slider.value)
-//     }).then(
-//         response => {
-//             if(response.status == 200){
-//                 return response.ok
-//             } 
-
-//             throw 'POST request to pdt data did not succeed.'
-//         }
+// TESTER = document.getElementById('pdt-chart')
+// TESTER.addEventListener('DOMContentLoaded', function(){
+//     fetch("/pdt/pdt_data").then(
+//         response => response.json()
 //     ).then(
-//         res => {
-//             fetch("/pdt/pdt_data").then(
-//                 response => response.json()
-//             ).then(
-//                 data => plot_pdt(data)
-//             )
-//         }
+//         data => plot_pdt(data)
 //     )
+// })
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     // var elems = document.getElementById('pdt-date');
+//     // var instances = M.Datepicker.init(elems, {});
+//     // elems.M_Datepicker.options.i18n.months = [
+//     //     'Janeiro', 'Fevereiro', 'Março',
+//     //     'Abril', 'Maio', 'Junho', 'Julho',
+//     //     'Agosto', 'Setembro', 'Outubro',
+//     //     'Novembro', 'Dezembro'
+//     // ];
+
+//     var elems = document.querySelectorAll('select');
+//     var instances = M.FormSelect.init(elems, {});
+    
 // });
 
-TESTER = document.getElementById('pdt-chart')
-TESTER.addEventListener('DOMContentLoaded', function(){
-    fetch("/pdt/pdt_data").then(
-        response => response.json()
-    ).then(
-        data => plot_pdt(data)
-    )
-})
+
+
+
+
+
+
